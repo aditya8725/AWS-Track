@@ -1,0 +1,75 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    margin: 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Login Page Styles */
+.login-container {
+    width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.login-container h2 {
+    text-align: center;
+}
+
+.login-container form {
+    margin-top: 20px;
+}
+
+.login-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background-color: #555;
+}

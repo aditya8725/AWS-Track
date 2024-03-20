@@ -1,0 +1,14 @@
+p{
+    margin: 0px;
+    padding: 5px;
+ 
+}
+body{
+    background-color: antiquewhite;
+}
+h1{
+    background-color: burlywood;
+    color: brown;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-bottom: 1px solid red;
+}
