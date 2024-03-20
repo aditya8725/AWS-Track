@@ -1,0 +1,32 @@
+# BEANSTALK-------> PAAS
+
+
+https://github.com/mahendra-shinde/sample-library-api
+
+
+Download the sample project
+Build : mvn package -DskipTests
+
+Run:
+cd target
+java -jar library-api-1.0.jar
+
+To STop : Press CTRL+C
+
+
+Deployed app:
+http://library-api.us-east-1.elasticbeanstalk.com
+
+BeanStalk :> Java-11 without tomcat
+
+Assignment
+-------------
+Using WebConsole::
+Create S3 bucket with name YOURNAME-assign
+Create SQS queue with name YOURNAME-queue
+
+Build a Java application to use both S3 and SQS 
+
+1. Application must accept a single line of text from user and then convert it into a S3 Object.
+2. The object key must be a timestamp (Year-day-month-hours-minutes-seconds) with .txt extension
+3. After the s3 object is uploaded (Using "putObject"), send a message to the Queue.

@@ -1,0 +1,91 @@
+S3 GET BUCKET LIST
+==================
+Right click... any where on the folder.
+ 
+Select new --> new project
+ 
+Select maven --> maven project
+ 
+Create a simple project
+ 
+Group : comp.aditya (package name)
+artifact I'd: demo1 (folder name)
+ 
+Name : demo 2
+Description: this is demo
+ 
+Finish
+---------------------------------------------------------------------
+
+
+S3 UPLOAD DEMO
+================
+
+Right click... any where on the folder.
+ 
+Select new --> spring starter project
+ 
+Name : demo
+Type : maven
+Group : comp.aditya (package name)
+artifact I'd: demo1 (folder name)
+ 
+Next
+ 
+Next
+ 
+Finish
+
+------------------------------------------------------------
+
+Microsoft Windows [Version 10.0.19045.3930]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\JAVATest\ddemo-2>cd target
+
+D:\JAVATest\ddemo-2\target>dir
+ Volume in drive D is DATA
+ Volume Serial Number is 207E-DA54
+
+ Directory of D:\JAVATest\ddemo-2\target
+
+03/05/2024  04:15 PM    <DIR>          .
+03/05/2024  04:15 PM    <DIR>          ..
+03/05/2024  09:56 AM    <DIR>          classes
+03/05/2024  04:15 PM        23,213,846 ddemo-2-1.0.jar
+03/05/2024  04:15 PM             3,913 ddemo-2-1.0.jar.original
+03/05/2024  10:07 AM    <DIR>          generated-sources
+03/05/2024  10:07 AM    <DIR>          generated-test-sources
+03/05/2024  10:07 AM    <DIR>          maven-archiver
+03/05/2024  10:07 AM    <DIR>          maven-status
+03/05/2024  04:15 PM    <DIR>          surefire-reports
+03/05/2024  09:55 AM    <DIR>          test-classes
+               2 File(s)     23,217,759 bytes
+               9 Dir(s)  828,561,842,176 bytes free
+
+
+D:\JAVATest\ddemo-2\target>"C:\Program Files\jdk-17.0.1\bin\java.exe" -jar ddemo-2-1.0.jar "C:\\Users\\
+adityap16\\Desktop\\AWS.txt"
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.3)
+
+
+
+2024-03-05T16:16:24.743+05:30  INFO 26740 --- [           main] com.aditya.demo.Ddemo2Application
+  : Starting Ddemo2Application v1.0 using Java 17.0.1 with PID 26740 (D:\JAVATest\ddemo-2\target\ddemo-
+2-1.0.jar started by adityap16 in D:\JAVATest\ddemo-2\target)
+2024-03-05T16:16:24.749+05:30  INFO 26740 --- [           main] com.aditya.demo.Ddemo2Application
+  : No active profile set, falling back to 1 default profile: "default"
+2024-03-05T16:16:25.540+05:30  INFO 26740 --- [           main] com.aditya.demo.Ddemo2Application
+  : Started Ddemo2Application in 1.441 seconds (process running for 2.019)
+File to be uploaded to bucket : C:\\Users\\adityap16\\Desktop\\AWS.txt
+bucket-219861
+File C:\\Users\\adityap16\\Desktop\\AWS.txt uploaded successfully
+
+D:\JAVATest\ddemo-2\target>

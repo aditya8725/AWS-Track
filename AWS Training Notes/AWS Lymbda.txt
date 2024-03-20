@@ -1,0 +1,21 @@
+LYMBDA
+
+
+serverless
+===========
+
+-> Deploying small application in server only when they are "triggered".
+-> As soon as "Exectution" is completed, undeployed the servers.
+-> Cost reduction (Consumption model)
+-> Multiple in "Scalable",multiple triggers results in mutliple instances.
+	--> They should not be used for traditional application.
+
+-> serverless "application" are actually "Single" task !...
+
+
+
+-> Cloud Native Application
+	Application that "Always" run in cloud !
+-> Vendor Lock in :
+	AWS Lambda run "entirely" in aws cloud
+	Azure function run "entirely" in Microsoft azure cloud

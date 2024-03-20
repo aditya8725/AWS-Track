@@ -1,0 +1,26 @@
+COLOCALTION ----->ONLY FOR BUSINESS
+
+CLOUD IS GOOD FOR STARTUPS.
+
+IAAS ---> Offers better control for it admins
+PAAS----> Platform as a service , easy to use platfor for developers
+
+
+3 differnt way to get a vehicle(car)
+1. own a car /purchase one //owner //iaas
+	costly
+ 
+2. lease a car(rent car for fixed duration) //still not a user. (paas)
+	relatively less than own
+
+3. book a car for single travel(ola/uber)  ///saas
+	cheaper.
+
+shells is also alailabe in aws--------> not recomended to use
+
+subnet a samll group of netwrok(netwrok within a network)
+
+
+=================================================
+vpc-->region
+subnet---availability zone

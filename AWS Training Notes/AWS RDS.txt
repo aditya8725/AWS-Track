@@ -1,0 +1,45 @@
+connect using cloudshell
+
+mysql -uadmin -ppassword1234 -hdatabase-1.cp46g868yhgx.us-east-2.rds.amazonaws.com
+
+mysql -uadmin -ppassword1234 -hdatabase-arp.cp46g868yhgx.us-east-2.rds.amazonaws.com
+
+
+RDS Instance creation check-list
+================================
+RDS Instance creation check-list
+
+1. Find existing VPC with Public Subnet, write down the name / id of VPC (Public 2,3,0)
+2. Create new RDS with "Standard create" option
+	- Engine : MySQL (Aruroa MySQL, MariaDB)
+	- Plan : Free Tier Eligible
+3. Set the PASSWORD for new instance
+4. choose the VPC from step-1
+5. Choose option to "create new security group" use unique name for security group
+	"sg-YOUNAME"
+6. Set Public Access : YES
+
+	Edit the inbound rules
+
+7. Accept all the defaults and click "Create Database"
+8. In "Storage autosacle", disable "Storage Autoscaling"
+8. Wait for Database to be ready! and then click "Get Access Credentials"
+9. Copy endpoint & password
+10. Use "Cloud Shell" from the webconsole.
+11. Use following commands in cloud shell
+
+	$ mysql --version
+	$ mysql -hENDPOINT -pPASSWORD -uUSER
+	mysql (none) > create database sampledb;
+	mysql (none) > use sampledb;
+	mysql (sampledb) >
+	mysql (sampledb) > create table emps (empid int primary key auto_increment, ename varchar(20));
+	mysql (sampledb) > insert into emps (ename) values ('Dharmendra');
+	mysql (sampledb) > insert into emps (ename) values ('Gajendra');
+	mysql (sampledb) > insert into emps (ename) values ('Narendra');
+	mysql (sampledb) > insert into emps (ename) values ('Rajendra');
+	mysql (sampledb) > insert into emps (ename) values ('Surendra');
+	mysql (sampledb) > commit;
+
+
+mysql -hdatabase-arp.cp46g868yhgx.us-east-2.rds.amazonaws.com -ppassword1234 -uadmin

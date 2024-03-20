@@ -1,0 +1,193 @@
+Java 17 Dev Environment
+-------------------------
+
+Locate your JDK-17 Installation directories
+
+My System:
+C:\Program Files\Java\jdk-17
+
+Your System:
+C:\Program Files\jdk-17.0.1
+
+Setup USER Environment Variable:
+Start Menu > type "ENV" > "Edit Env Vars for YOUR account"
+
+in "User Variables" section, click "NEW" button to create :
+	Env Name: JAVA_HOME
+	Value : C:\Program Files\jdk-17.0.1
+
+Select another Variable "PATH" and click "Edit"
+Add new value "%JAVA_HOME%\bin" (No space anywhere inside this value)
+
+Remove any JDK path from "PATH" variable (of an older JDK)
+
+"Install" apache maven from Self Service portal.
+Folder to extract "C:\" 
+
+Locate the folder in windows explorer and find the "bin" folder
+your BIN folder path should be : 
+	C:\apache-maven-3.9.5\bin
+
+Edit Env Var for "Your Account" and add new Entry in "Path" variable
+C:\apache-maven-3.9.5\bin
+
+OPen a new CMD and try following commands:
+javac -version
+java -version
+mvn --version
+
+Every  "generated" maven project is by default configured to use OLDER java version
+If properties section is missing, add new
+
+ <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+ </properties>
+
+From "dependencies" remove the "JUnit" dependency
+
+Add "SqS" dependecies for AWS SQS Service
+
+<!-- https://mvnrepository.com/artifact/software.amazon.awssdk/sqs -->
+<dependency>
+    <groupId>software.amazon.awssdk</groupId>
+    <artifactId>sqs</artifactId>
+    <version>2.25.2</version>
+</dependency>
+
+
+
+
+==================================================================================
+display list of queues in ur region
+
+package com.aditya_demo_1;
+
+import java.util.List;
+
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.sqs.SqsClient;
+import software.amazon.awssdk.services.sqs.model.ListQueuesRequest;
+import software.amazon.awssdk.services.sqs.model.ListQueuesResponse;
+
+public class App 
+{
+    public static void main( String[] args )
+    {
+        SqsClient client = SqsClient.builder().region(Region.AP_SOUTHEAST_2).build();
+
+        ListQueuesRequest req = ListQueuesRequest.builder().build();
+
+        ListQueuesResponse resp = client.listQueues(req);
+
+        List<String> queuerul = resp.queueUrls();
+
+        System.out.println("You have "+queuerul.size()+ " queues");
+
+        queuerul.forEach(qurl -> System.out.println("Queue URL: "+qurl));
+    }
+}
+
+
+==================================================================================
+
+display list,send msg and receive msg
+
+
+package com.aditya_demo_1;
+
+import java.util.List;
+
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.sqs.SqsClient;
+import software.amazon.awssdk.services.sqs.model.DeleteMessageRequest;
+import software.amazon.awssdk.services.sqs.model.ListQueuesRequest;
+import software.amazon.awssdk.services.sqs.model.ListQueuesResponse;
+import software.amazon.awssdk.services.sqs.model.ReceiveMessageRequest;
+import software.amazon.awssdk.services.sqs.model.ReceiveMessageResponse;
+import software.amazon.awssdk.services.sqs.model.SendMessageRequest;
+
+import software.amazon.awssdk.services.sqs.model.Message;
+
+public class App {
+    //sqs url
+    private static final String queueURL = "https://sqs.ap-southeast-2.amazonaws.com/891377117529/AdityaR";
+
+    public static void main(String[] args) {
+        SqsClient client = SqsClient.builder().region(Region.AP_SOUTHEAST_2).build();
+
+        // List all Queues
+        listQueues(client);
+
+        // send Meaasge from java code to aws
+        sendMessage(client, "Hello World from Aditya..!");
+
+        // receive msg from aws to java code
+        System.out.println("Start reading messages ...");
+        receiveMessage(client);
+    }
+
+    static void listQueues(SqsClient client) 
+    {
+        ListQueuesRequest req = ListQueuesRequest.builder().build();
+        ListQueuesResponse resp = client.listQueues(req);
+
+        List<String> queueUrls = resp.queueUrls();
+        System.out.println("You have " + queueUrls.size() + " queues");
+        queueUrls.forEach(qUrl -> System.out.println("Queue Url : " + qUrl));
+    }
+
+    static void sendMessage(SqsClient client, String message) 
+    {
+        SendMessageRequest req = SendMessageRequest.builder().queueUrl(queueURL).messageBody(message).delaySeconds(2).build();
+        client.sendMessage(req);
+        System.out.println("Message sent successfully...... !");
+    }
+
+    static void receiveMessage(SqsClient client) {
+        ReceiveMessageRequest req = ReceiveMessageRequest.builder()
+                .queueUrl(queueURL)
+                .maxNumberOfMessages(5)
+                .waitTimeSeconds(19)
+                .visibilityTimeout(2)
+                .build();
+
+        ReceiveMessageResponse resp = client.receiveMessage(req);
+        List<Message> messages = resp.messages();
+        System.out.println("Found " + messages.size() + " messages");
+        for (Message msg : messages) {
+            System.out.println("Reading the message....");
+            System.out.println("  " + msg.body());
+            System.out.println("Mark as delivered (Delete from the Queue)");
+            DeleteMessageRequest del = DeleteMessageRequest.builder()
+                    .queueUrl(queueURL)
+                    .receiptHandle(msg.receiptHandle())
+                    .build();
+            client.deleteMessage(del);
+        }
+    }
+}
+======================================================================================================================================
+
+Task/Actitvity
+
+1) cretae a new SQS queue for "food-item" the queue name must include your name as prefix adityafoodorder
+2) write First java application for "customers" to place order
+
+food item: __ choice: rice,biryani, roti..
+quantity: 1,2,....3....N;
+Table: 1,2,3,4...10
+
+convert these details into a msg like this:
+	order "food" for "Quantity" on table "table-no"
+
+example- order "Veg Thali" for "1" on table "1"
+
+And send this message to foodorder queue
+
+3) write second JAVA Application for "chef" to acceopt all the orders
+
+use loop to get all the messages
+
+read the message and print it on screen
